@@ -35,9 +35,9 @@ const ItemEditDialog: React.FC<ItemEditDialogProps> = ({ open, initialName, init
     setQuantity(initialQuantity !== undefined ? String(initialQuantity) : "");
     setValue(initialValue !== undefined ? String(initialValue) : "");
     setContainerId(initialContainerId);
-    // Set characterId based on initialContainerId
-    const cont = containers.find(c => c.id === initialContainerId);
-    setCharacterId(cont ? cont.character_id : "");
+  // Set characterId based on initialContainerId
+  const cont = containers.find(c => c.id === initialContainerId);
+  setCharacterId(cont ? cont.character_id : "");
   }, [initialName, initialDescription, initialQuantity, initialValue, initialContainerId, containers, open]);
   return (
     <Dialog open={open} onClose={onClose} PaperProps={{ sx: { bgcolor: '#4e3d2c' } }}>
@@ -61,6 +61,92 @@ const ItemEditDialog: React.FC<ItemEditDialogProps> = ({ open, initialName, init
             '& .MuiOutlinedInput-notchedOutline': { borderColor: '#a89984' },
           }}
         />
+        <div style={{ marginTop: 16, marginBottom: 4 }}>
+          <span style={{ color: '#fabd2f', fontWeight: 600, fontSize: 15 }}>Character</span>
+        </div>
+        <TextField
+          select
+          label="Character"
+          fullWidth
+          value={characterId}
+          onChange={e => {
+            setCharacterId(e.target.value);
+            setContainerId("");
+          }}
+          InputLabelProps={{ style: { color: '#ebdbb2' } }}
+          sx={{
+            mt: 0,
+            '& .MuiInputBase-root, & .MuiOutlinedInput-root, & .MuiSelect-root': {
+              bgcolor: '#3c2f23',
+              color: '#ebdbb2',
+            },
+            '& .MuiSelect-select, & .MuiInputBase-input': {
+              color: '#ebdbb2',
+              bgcolor: '#3c2f23',
+            },
+            '& .MuiInputLabel-root': { color: '#ebdbb2' },
+            '& .MuiOutlinedInput-notchedOutline': { borderColor: '#a89984' },
+            '& .MuiMenuItem-root': { color: '#ebdbb2', bgcolor: '#3c2f23' },
+          }}
+          SelectProps={{
+            MenuProps: {
+              PaperProps: {
+                sx: {
+                  bgcolor: '#3c2f23',
+                  color: '#ebdbb2',
+                },
+              },
+            },
+          }}
+        >
+          {characters.map((char: Character) => (
+            <MenuItem key={char.id} value={char.id} sx={{ color: '#ebdbb2', bgcolor: '#3c2f23' }}>{char.name}</MenuItem>
+          ))}
+        </TextField>
+        <div style={{ marginTop: 16, marginBottom: 4 }}>
+          <span style={{ color: '#fabd2f', fontWeight: 600, fontSize: 15 }}>Container</span>
+        </div>
+        <TextField
+          select
+          label="Container"
+          fullWidth
+          value={containerId}
+          onChange={e => setContainerId(e.target.value)}
+          InputLabelProps={{ style: { color: '#ebdbb2' } }}
+          sx={{
+            mt: 0,
+            '& .MuiInputBase-root, & .MuiOutlinedInput-root, & .MuiSelect-root': {
+              bgcolor: '#3c2f23',
+              color: '#ebdbb2',
+            },
+            '& .MuiSelect-select, & .MuiInputBase-input': {
+              color: '#ebdbb2',
+              bgcolor: '#3c2f23',
+            },
+            '& .MuiInputLabel-root': { color: '#ebdbb2' },
+            '& .MuiOutlinedInput-notchedOutline': { borderColor: '#a89984' },
+            '& .MuiMenuItem-root': { color: '#ebdbb2', bgcolor: '#3c2f23' },
+          }}
+          SelectProps={{
+            MenuProps: {
+              PaperProps: {
+                sx: {
+                  bgcolor: '#3c2f23',
+                  color: '#ebdbb2',
+                },
+              },
+            },
+          }}
+          disabled={!characterId}
+        >
+          {containers.filter((container: Container) => container.character_id === characterId).length === 0 ? (
+            <MenuItem value="" disabled>No containers available</MenuItem>
+          ) : (
+            containers.filter((container: Container) => container.character_id === characterId).map((container: Container) => (
+              <MenuItem key={container.id} value={container.id} sx={{ color: '#ebdbb2', bgcolor: '#3c2f23' }}>{container.name}</MenuItem>
+            ))
+          )}
+        </TextField>
         <TextField
           label="Description"
           fullWidth
@@ -130,6 +216,7 @@ const ItemEditDialog: React.FC<ItemEditDialogProps> = ({ open, initialName, init
             '& .MuiOutlinedInput-notchedOutline': { borderColor: '#a89984' },
           }}
         />
+
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} color="inherit">Cancel</Button>
