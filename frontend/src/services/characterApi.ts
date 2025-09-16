@@ -5,7 +5,7 @@ export const updateCharacter = async (id: string, character: Omit<Character, 'id
 import axios from 'axios';
 import { Character } from '../types';
 
-const API_URL = 'http://localhost:8000/characters';
+const API_URL = `${import.meta.env.VITE_API_URL}/characters`;
 
 export const getCharacters = async (): Promise<Character[]> => {
   const res = await axios.get(API_URL);
