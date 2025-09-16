@@ -14,12 +14,12 @@ export interface Item {
 export type ItemInput = Omit<Item, "id">;
 
 export async function getItems(): Promise<Item[]> {
-  const res = await axios.get(API_URL);
+  const res = await axios.get(`${API_URL}/`);
   return res.data;
 }
 
 export async function createItem(item: ItemInput): Promise<Item> {
-  const res = await axios.post(API_URL, item);
+  const res = await axios.post(`${API_URL}/`, item);
   return res.data;
 }
 

@@ -8,12 +8,12 @@ import { Character } from '../types';
 const API_URL = `${import.meta.env.VITE_API_URL}/characters`;
 
 export const getCharacters = async (): Promise<Character[]> => {
-  const res = await axios.get(API_URL);
+  const res = await axios.get(`${API_URL}/`);
   return res.data;
 };
 
 export const createCharacter = async (character: Omit<Character, 'id'>): Promise<Character> => {
-  const res = await axios.post(API_URL, character);
+  const res = await axios.post(`${API_URL}/`, character);
   return res.data;
 };
 

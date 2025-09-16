@@ -2,6 +2,7 @@
 FROM node:20-alpine as frontend-build
 WORKDIR /app/frontend
 COPY frontend/package.json frontend/package-lock.json ./
+COPY frontend/.env.production .env.production
 RUN npm install
 COPY frontend .
 RUN npm run build
@@ -26,13 +27,19 @@ COPY backend/pyproject.toml backend/poetry.lock ./
 RUN poetry config virtualenvs.create false && poetry install --no-interaction --no-ansi --only main --no-root
 # Copy backend app code
 COPY backend/app ./app
+# Copy Alembic config
+COPY backend/alembic.ini ./alembic.ini
 # Copy frontend build to nginx html
 COPY --from=frontend-build /app/frontend/dist /usr/share/nginx/html
 # Copy nginx config
 COPY frontend/nginx.conf /etc/nginx/nginx.conf
 # Copy supervisor config
 COPY ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+# Ensure /data/db directory exists and is writable
+RUN mkdir -p /data/db && chmod 777 /data/db
 # Expose ports
 EXPOSE 80 8000
-# Entrypoint
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+# Entrypoint script to fix permissions and start supervisor
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]

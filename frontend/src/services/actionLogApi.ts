@@ -13,6 +13,6 @@ export interface ActionLog {
 }
 
 export async function getActionLogs(entity_type: string, entity_id: string): Promise<ActionLog[]> {
-  const res = await axios.get(API_URL, { params: { entity_type, entity_id } });
+  const res = await axios.get(`${API_URL}/`, { params: { entity_type, entity_id } });
   return res.data;
 }

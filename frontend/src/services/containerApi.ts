@@ -12,12 +12,12 @@ export interface Container {
 export type ContainerInput = Omit<Container, "id">;
 
 export async function getContainers(): Promise<Container[]> {
-  const res = await axios.get(API_URL);
+  const res = await axios.get(`${API_URL}/`);
   return res.data;
 }
 
 export async function createContainer(container: ContainerInput): Promise<Container> {
-  const res = await axios.post(API_URL, container);
+  const res = await axios.post(`${API_URL}/`, container);
   return res.data;
 }
 

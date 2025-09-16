@@ -16,7 +16,6 @@ frontend/dist/
 frontend/.cache/
 frontend/.vite/
 frontend/.env
-frontend/.env.*
 frontend/.vscode/
 frontend/.idea/
 frontend/.DS_Store

@@ -19,12 +19,12 @@ export type CoinInput = {
 };
 
 export async function getCoins(): Promise<Coin[]> {
-  const res = await axios.get(API_URL);
+  const res = await axios.get(`${API_URL}/`);
   return res.data;
 }
 
 export async function createCoin(coin: CoinInput): Promise<Coin> {
-  const res = await axios.post(API_URL, coin);
+  const res = await axios.post(`${API_URL}/`, coin);
   return res.data;
 }
 

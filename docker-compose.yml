@@ -5,16 +5,13 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    volumes:
-      - bagofholding-db:/data
+    # No volumes, keep DB inside container
     environment:
-      - DATABASE_URL=sqlite+aiosqlite:///data/bagofholding.db
+      - DATABASE_URL=sqlite+aiosqlite:///app/bagofholding.db
     ports:
       - "3000:80"
       - "8001:8000"
     restart: unless-stopped
 
-volumes:
-  bagofholding-db:
-    driver: local
+
 

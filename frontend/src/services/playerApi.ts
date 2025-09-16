@@ -8,12 +8,12 @@ export interface Player {
 }
 
 export async function getPlayers(): Promise<Player[]> {
-  const res = await axios.get(API_URL);
+  const res = await axios.get(`${API_URL}/`);
   return res.data;
 }
 
 export async function addPlayer(name: string): Promise<Player> {
-  const res = await axios.post(API_URL, { name });
+  const res = await axios.post(`${API_URL}/`, { name });
   return res.data;
 }
 
