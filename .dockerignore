@@ -1,0 +1,27 @@
+# Ignore the test database file from backend during Docker build
+# Ignore Python cache and compiled files
+**/__pycache__/
+*.pyc
+
+# Ignore test/dev database
+backend/app.db
+
+# Ignore local environment files
+.env
+.env.example
+
+# Frontend/node
+frontend/node_modules/
+frontend/dist/
+frontend/.cache/
+frontend/.vite/
+frontend/.env
+frontend/.env.*
+frontend/.vscode/
+frontend/.idea/
+frontend/.DS_Store
+frontend/.eslintcache
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/*.local

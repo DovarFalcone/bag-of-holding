@@ -1,0 +1,69 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+*.sqlite
+*.log
+.env
+.env.*
+venv/
+backend/.venv/
+backend/.mypy_cache/
+backend/.pytest_cache/
+backend/.coverage
+backend/instance/
+backend/.env
+backend/.env.*
+
+# Node
+node_modules/
+frontend/node_modules/
+frontend/.env
+frontend/.env.*
+
+# Build
+frontend/dist/
+frontend/build/
+backend/build/
+
+# VSCode
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+*.pid
+*.sock
+db.sqlite3
+backend/db.sqlite3
+backend/app.db
+backend/app.sqlite3
+
+# Alembic
+backend/app/db/migrations/versions/*.pyc
+
+# Logs
+*.log
+logs/
+
+# Misc
+*.swp
+*.swo
+*.bak
+*.tmp
+
+# Coverage
+htmlcov/
+.coverage
+coverage.xml
+
+# Nginx
+nginx/logs/
+
+# Poetry
+poetry.lock

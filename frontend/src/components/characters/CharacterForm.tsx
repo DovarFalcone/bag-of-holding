@@ -1,0 +1,52 @@
+import React, { useState, useEffect } from 'react';
+import { Box, Button, MenuItem, TextField, Stack } from '@mui/material';
+import { usePlayers } from '../players/usePlayers';
+import useCharacters from './useCharacters';
+
+
+interface CharacterFormProps {
+  addCharacter: (character: { name: string; player_id: string }) => void;
+}
+
+const CharacterForm: React.FC<CharacterFormProps> = ({ addCharacter }) => {
+  const { players, loading } = usePlayers();
+  const [name, setName] = useState('');
+  const [playerId, setPlayerId] = useState('');
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name || !playerId) return;
+    addCharacter({ name, player_id: playerId });
+    setName('');
+    setPlayerId('');
+  };
+
+  return (
+    <Box component="form" onSubmit={handleSubmit}>
+      <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+        <TextField
+          label="Character Name"
+          value={name}
+          onChange={e => setName(e.target.value)}
+          required
+          sx={{ input: { color: '#ebdbb2' }, label: { color: '#a89984' } }}
+        />
+        <TextField
+          select
+          label="Player"
+          value={playerId}
+          onChange={e => setPlayerId(e.target.value)}
+          required
+          sx={{ minWidth: 220, color: '#ebdbb2', '& .MuiInputBase-input': { color: '#ebdbb2' }, '& .MuiInputLabel-root': { color: '#a89984' } }}
+        >
+          {players.map((player: { id: string; name: string }) => (
+            <MenuItem key={player.id} value={player.id}>{player.name}</MenuItem>
+          ))}
+        </TextField>
+        <Button type="submit" variant="contained" sx={{ bgcolor: '#b8bb26', color: '#282828' }}>Add Character</Button>
+      </Stack>
+    </Box>
+  );
+};
+
+export default CharacterForm;
