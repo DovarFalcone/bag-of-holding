@@ -70,6 +70,25 @@ Bag of Holding is a modern, full-stack inventory management solution for Dungeon
 - The backend runs at `http://localhost:8000` (internal)
 - The SQLite database is persisted in a Docker volume
 
+## Docker Compose
+
+ ```sh
+services:
+  app:
+    image: dovarfalcone988/bag-of-holding:latest
+    environment:
+      - DATABASE_URL=sqlite+aiosqlite:///app/bagofholding.db
+    ports:
+      - "3000:80"
+      - "8001:8000"
+    restart: unless-stopped
+    volumes:
+      - bagofholding_data:/app
+
+volumes:
+  bagofholding_data:
+```
+
 ## Project Structure
 ```
 backend/    # FastAPI app, database, migrations
