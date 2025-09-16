@@ -23,7 +23,17 @@ const PlayerForm = ({ onAdd }: { onAdd: (name: string) => void }) => {
           onChange={e => setName(e.target.value)}
           size="small"
           fullWidth
-          sx={{ input: { color: '#ebdbb2' }, label: { color: '#a89984' } }}
+          InputLabelProps={{ style: { color: '#ebdbb2' } }}
+          sx={{
+            input: { color: '#ebdbb2' },
+            label: { color: '#ebdbb2' },
+            '& .MuiInputBase-root, & .MuiOutlinedInput-root': {
+              bgcolor: '#3c2f23',
+              color: '#ebdbb2',
+            },
+            '& .MuiInputLabel-root': { color: '#ebdbb2' },
+            '& .MuiOutlinedInput-notchedOutline': { borderColor: '#a89984' },
+          }}
         />
         <Button
           type="submit"

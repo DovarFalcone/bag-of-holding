@@ -22,9 +22,9 @@ const ContainerEditDialog: React.FC<ContainerEditDialogProps> = ({ open, initial
     setCharacterId(initialCharacterId);
   }, [initialName, initialDescription, initialCharacterId, open]);
   return (
-    <Dialog open={open} onClose={onClose}>
-      <DialogTitle>Edit/Transfer Container</DialogTitle>
-      <DialogContent>
+    <Dialog open={open} onClose={onClose} PaperProps={{ sx: { bgcolor: '#4e3d2c' } }}>
+      <DialogTitle sx={{ color: '#ebdbb2' }}>Edit/Transfer Container</DialogTitle>
+      <DialogContent sx={{ bgcolor: '#4e3d2c' }}>
         <TextField
           autoFocus
           margin="dense"
@@ -32,6 +32,17 @@ const ContainerEditDialog: React.FC<ContainerEditDialogProps> = ({ open, initial
           fullWidth
           value={name}
           onChange={e => setName(e.target.value)}
+          InputLabelProps={{ style: { color: '#ebdbb2' } }}
+          sx={{
+            input: { color: '#ebdbb2' },
+            label: { color: '#ebdbb2' },
+            '& .MuiInputBase-root, & .MuiOutlinedInput-root': {
+              bgcolor: '#3c2f23',
+              color: '#ebdbb2',
+            },
+            '& .MuiInputLabel-root': { color: '#ebdbb2' },
+            '& .MuiOutlinedInput-notchedOutline': { borderColor: '#a89984' },
+          }}
         />
         <TextField
           margin="dense"
@@ -39,6 +50,17 @@ const ContainerEditDialog: React.FC<ContainerEditDialogProps> = ({ open, initial
           fullWidth
           value={description}
           onChange={e => setDescription(e.target.value)}
+          InputLabelProps={{ style: { color: '#ebdbb2' } }}
+          sx={{
+            input: { color: '#ebdbb2' },
+            label: { color: '#ebdbb2' },
+            '& .MuiInputBase-root, & .MuiOutlinedInput-root': {
+              bgcolor: '#3c2f23',
+              color: '#ebdbb2',
+            },
+            '& .MuiInputLabel-root': { color: '#ebdbb2' },
+            '& .MuiOutlinedInput-notchedOutline': { borderColor: '#a89984' },
+          }}
         />
         <TextField
           select
@@ -46,10 +68,34 @@ const ContainerEditDialog: React.FC<ContainerEditDialogProps> = ({ open, initial
           fullWidth
           value={characterId}
           onChange={e => setCharacterId(e.target.value)}
-          sx={{ minWidth: 220, mt: 2, color: '#ebdbb2', '& .MuiInputBase-input': { color: '#ebdbb2' }, '& .MuiInputLabel-root': { color: '#a89984' } }}
+          InputLabelProps={{ style: { color: '#ebdbb2' } }}
+          sx={{
+            minWidth: 220, mt: 2,
+            '& .MuiInputBase-root, & .MuiOutlinedInput-root, & .MuiSelect-root': {
+              bgcolor: '#3c2f23',
+              color: '#ebdbb2',
+            },
+            '& .MuiSelect-select, & .MuiInputBase-input': {
+              color: '#ebdbb2',
+              bgcolor: '#3c2f23',
+            },
+            '& .MuiInputLabel-root': { color: '#ebdbb2' },
+            '& .MuiOutlinedInput-notchedOutline': { borderColor: '#a89984' },
+            '& .MuiMenuItem-root': { color: '#ebdbb2', bgcolor: '#3c2f23' },
+          }}
+          SelectProps={{
+            MenuProps: {
+              PaperProps: {
+                sx: {
+                  bgcolor: '#3c2f23',
+                  color: '#ebdbb2',
+                },
+              },
+            },
+          }}
         >
           {characters.map((char) => (
-            <MenuItem key={char.id} value={char.id}>{char.name}</MenuItem>
+            <MenuItem key={char.id} value={char.id} sx={{ color: '#ebdbb2', bgcolor: '#3c2f23' }}>{char.name}</MenuItem>
           ))}
         </TextField>
       </DialogContent>

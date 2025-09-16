@@ -17,16 +17,16 @@ interface CoinEditDialogProps {
 const CoinEditDialog: React.FC<CoinEditDialogProps> = ({ open, initialCharacterId, initialCoinType, initialAmount, characters, onClose, onSave }) => {
   const [characterId, setCharacterId] = useState(initialCharacterId);
   const [coinType, setCoinType] = useState(initialCoinType);
-  const [amount, setAmount] = useState<string>("");
+  const [amount, setAmount] = useState<string>(initialAmount !== undefined ? String(initialAmount) : "");
   React.useEffect(() => {
     setCharacterId(initialCharacterId);
     setCoinType(initialCoinType);
-  setAmount("");
+    setAmount(initialAmount !== undefined ? String(initialAmount) : "");
   }, [initialCharacterId, initialCoinType, initialAmount, open]);
   return (
-    <Dialog open={open} onClose={onClose}>
-      <DialogTitle>Edit Coin</DialogTitle>
-      <DialogContent>
+    <Dialog open={open} onClose={onClose} PaperProps={{ sx: { bgcolor: '#4e3d2c' } }}>
+      <DialogTitle sx={{ color: '#ebdbb2' }}>Edit Coin</DialogTitle>
+      <DialogContent sx={{ bgcolor: '#4e3d2c' }}>
         <TextField
           select
           label="Character"
@@ -63,11 +63,22 @@ const CoinEditDialog: React.FC<CoinEditDialogProps> = ({ open, initialCharacterI
           }}
           onBlur={() => { if (amount === "" || amount === "-") setAmount("0"); }}
           inputProps={{ inputMode: "numeric", pattern: "[0-9\\-]*" }}
+          InputLabelProps={{ style: { color: '#ebdbb2' } }}
+          sx={{
+            input: { color: '#ebdbb2' },
+            label: { color: '#ebdbb2' },
+            '& .MuiInputBase-root, & .MuiOutlinedInput-root': {
+              bgcolor: '#3c2f23',
+              color: '#ebdbb2',
+            },
+            '& .MuiInputLabel-root': { color: '#ebdbb2' },
+            '& .MuiOutlinedInput-notchedOutline': { borderColor: '#a89984' },
+          }}
         />
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} color="inherit">Cancel</Button>
-  <Button onClick={() => { onSave(characterId, coinType, Number(amount) || 0); onClose(); }} variant="contained" color="primary">Save</Button>
+        <Button onClick={() => { onSave(characterId, coinType, Number(amount) || 0); onClose(); }} variant="contained" color="primary">Save</Button>
       </DialogActions>
     </Dialog>
   );

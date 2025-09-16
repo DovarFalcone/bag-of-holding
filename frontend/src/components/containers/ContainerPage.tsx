@@ -15,7 +15,7 @@ const ContainerPage: React.FC = () => {
     removeContainer,
     editContainer
   } = useContainers();
-  const [changelogIdx, setChangelogIdx] = useState<number | null>(null);
+  const [changelogId, setChangelogId] = useState<string | null>(null);
   const { characters, fetchCharacters } = useCharacters();
 
   useEffect(() => {
@@ -34,12 +34,12 @@ const ContainerPage: React.FC = () => {
         deleteContainer={removeContainer}
         editContainer={editContainer}
         characters={characters}
-        onShowChangelog={setChangelogIdx}
-        changelogIdx={changelogIdx}
+        onShowChangelog={setChangelogId}
+        changelogId={changelogId}
       />
       {/* Show changelog for selected container only when toggled */}
-      {changelogIdx !== null && containers[changelogIdx] && (
-        <ActionLogTimeline entityType="container" entityId={containers[changelogIdx].id} />
+      {changelogId !== null && containers.find(c => c.id === changelogId) && (
+        <ActionLogTimeline entityType="container" entityId={changelogId} />
       )}
     </Box>
   );

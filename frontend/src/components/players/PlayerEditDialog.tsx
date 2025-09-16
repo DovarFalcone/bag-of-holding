@@ -22,6 +22,17 @@ const PlayerEditDialog: React.FC<PlayerEditDialogProps> = ({ open, initialName, 
           fullWidth
           value={name}
           onChange={e => setName(e.target.value)}
+          InputLabelProps={{ style: { color: '#ebdbb2' } }}
+          sx={{
+            input: { color: '#ebdbb2' },
+            label: { color: '#ebdbb2' },
+            '& .MuiInputBase-root, & .MuiOutlinedInput-root': {
+              bgcolor: '#3c2f23',
+              color: '#ebdbb2',
+            },
+            '& .MuiInputLabel-root': { color: '#ebdbb2' },
+            '& .MuiOutlinedInput-notchedOutline': { borderColor: '#a89984' },
+          }}
         />
       </DialogContent>
       <DialogActions>

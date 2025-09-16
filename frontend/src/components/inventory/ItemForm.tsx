@@ -44,14 +44,36 @@ const ItemForm: React.FC<ItemFormProps> = ({ addItem, containers, characters }) 
           onChange={e => setName(e.target.value)}
           required
           fullWidth
-          sx={{ input: { color: '#ebdbb2' }, label: { color: '#a89984' }, minWidth: { sm: 180 } }}
+          InputLabelProps={{ style: { color: '#ebdbb2' } }}
+          sx={{
+            minWidth: { sm: 180 },
+            input: { color: '#ebdbb2' },
+            label: { color: '#ebdbb2' },
+            '& .MuiInputBase-root, & .MuiOutlinedInput-root': {
+              bgcolor: '#3c2f23',
+              color: '#ebdbb2',
+            },
+            '& .MuiInputLabel-root': { color: '#ebdbb2' },
+            '& .MuiOutlinedInput-notchedOutline': { borderColor: '#a89984' },
+          }}
         />
         <TextField
           label="Description"
           value={description}
           onChange={e => setDescription(e.target.value)}
           fullWidth
-          sx={{ input: { color: '#ebdbb2' }, label: { color: '#a89984' }, minWidth: { sm: 180 } }}
+          InputLabelProps={{ style: { color: '#ebdbb2' } }}
+          sx={{
+            minWidth: { sm: 180 },
+            input: { color: '#ebdbb2' },
+            label: { color: '#ebdbb2' },
+            '& .MuiInputBase-root, & .MuiOutlinedInput-root': {
+              bgcolor: '#3c2f23',
+              color: '#ebdbb2',
+            },
+            '& .MuiInputLabel-root': { color: '#ebdbb2' },
+            '& .MuiOutlinedInput-notchedOutline': { borderColor: '#a89984' },
+          }}
         />
         <TextField
           label="Quantity"
@@ -65,7 +87,18 @@ const ItemForm: React.FC<ItemFormProps> = ({ addItem, containers, characters }) 
           required
           fullWidth
           inputProps={{ inputMode: "numeric", pattern: "[0-9\\-]*" }}
-          sx={{ input: { color: '#ebdbb2' }, label: { color: '#a89984' }, minWidth: { sm: 120 } }}
+          InputLabelProps={{ style: { color: '#ebdbb2' } }}
+          sx={{
+            minWidth: { sm: 120 },
+            input: { color: '#ebdbb2' },
+            label: { color: '#ebdbb2' },
+            '& .MuiInputBase-root, & .MuiOutlinedInput-root': {
+              bgcolor: '#3c2f23',
+              color: '#ebdbb2',
+            },
+            '& .MuiInputLabel-root': { color: '#ebdbb2' },
+            '& .MuiOutlinedInput-notchedOutline': { borderColor: '#a89984' },
+          }}
         />
         <TextField
           label="Value (gp)"
@@ -79,7 +112,18 @@ const ItemForm: React.FC<ItemFormProps> = ({ addItem, containers, characters }) 
           required
           fullWidth
           inputProps={{ inputMode: "numeric", pattern: "[0-9\\-]*" }}
-          sx={{ input: { color: '#ebdbb2' }, label: { color: '#a89984' }, minWidth: { sm: 120 } }}
+          InputLabelProps={{ style: { color: '#ebdbb2' } }}
+          sx={{
+            minWidth: { sm: 120 },
+            input: { color: '#ebdbb2' },
+            label: { color: '#ebdbb2' },
+            '& .MuiInputBase-root, & .MuiOutlinedInput-root': {
+              bgcolor: '#3c2f23',
+              color: '#ebdbb2',
+            },
+            '& .MuiInputLabel-root': { color: '#ebdbb2' },
+            '& .MuiOutlinedInput-notchedOutline': { borderColor: '#a89984' },
+          }}
         />
         <TextField
           select
@@ -91,10 +135,34 @@ const ItemForm: React.FC<ItemFormProps> = ({ addItem, containers, characters }) 
           }}
           required
           fullWidth
-          sx={{ minWidth: { sm: 180 }, color: '#ebdbb2' }}
+          InputLabelProps={{ style: { color: '#ebdbb2' } }}
+          sx={{
+            minWidth: { sm: 180 },
+            '& .MuiInputBase-root, & .MuiOutlinedInput-root, & .MuiSelect-root': {
+              bgcolor: '#3c2f23',
+              color: '#ebdbb2',
+            },
+            '& .MuiSelect-select, & .MuiInputBase-input': {
+              color: '#ebdbb2',
+              bgcolor: '#3c2f23',
+            },
+            '& .MuiInputLabel-root': { color: '#ebdbb2' },
+            '& .MuiOutlinedInput-notchedOutline': { borderColor: '#a89984' },
+            '& .MuiMenuItem-root': { color: '#ebdbb2', bgcolor: '#3c2f23' },
+          }}
+          SelectProps={{
+            MenuProps: {
+              PaperProps: {
+                sx: {
+                  bgcolor: '#3c2f23',
+                  color: '#ebdbb2',
+                },
+              },
+            },
+          }}
         >
           {characters.map((char: Character) => (
-            <MenuItem key={char.id} value={char.id}>{char.name}</MenuItem>
+            <MenuItem key={char.id} value={char.id} sx={{ color: '#ebdbb2', bgcolor: '#3c2f23' }}>{char.name}</MenuItem>
           ))}
         </TextField>
         <TextField
@@ -104,10 +172,34 @@ const ItemForm: React.FC<ItemFormProps> = ({ addItem, containers, characters }) 
           onChange={e => setContainerId(e.target.value)}
           required
           fullWidth
-          sx={{ minWidth: { sm: 260 }, color: '#ebdbb2' }}
+          InputLabelProps={{ style: { color: '#ebdbb2' } }}
+          sx={{
+            minWidth: { sm: 260 },
+            '& .MuiInputBase-root, & .MuiOutlinedInput-root, & .MuiSelect-root': {
+              bgcolor: '#3c2f23',
+              color: '#ebdbb2',
+            },
+            '& .MuiSelect-select, & .MuiInputBase-input': {
+              color: '#ebdbb2',
+              bgcolor: '#3c2f23',
+            },
+            '& .MuiInputLabel-root': { color: '#ebdbb2' },
+            '& .MuiOutlinedInput-notchedOutline': { borderColor: '#a89984' },
+            '& .MuiMenuItem-root': { color: '#ebdbb2', bgcolor: '#3c2f23' },
+          }}
+          SelectProps={{
+            MenuProps: {
+              PaperProps: {
+                sx: {
+                  bgcolor: '#3c2f23',
+                  color: '#ebdbb2',
+                },
+              },
+            },
+          }}
         >
           {containers.filter((c: Container) => c.character_id === characterId).map((container: Container) => (
-            <MenuItem key={container.id} value={container.id}>
+            <MenuItem key={container.id} value={container.id} sx={{ color: '#ebdbb2', bgcolor: '#3c2f23' }}>
               {container.name}
             </MenuItem>
           ))}

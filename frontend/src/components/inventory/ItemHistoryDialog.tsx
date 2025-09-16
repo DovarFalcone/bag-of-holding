@@ -17,7 +17,7 @@ interface ItemHistoryDialogProps {
 
 const ItemHistoryDialog: React.FC<ItemHistoryDialogProps> = ({ open, onClose, itemId, containerId, characterId }) => (
   <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
-    <DialogTitle>
+    <DialogTitle sx={{ bgcolor: '#3c2f23', color: '#fabd2f' }}>
       Item History
       <IconButton
         aria-label="close"
@@ -27,7 +27,7 @@ const ItemHistoryDialog: React.FC<ItemHistoryDialogProps> = ({ open, onClose, it
         <CloseIcon />
       </IconButton>
     </DialogTitle>
-    <DialogContent>
+    <DialogContent sx={{ bgcolor: '#3c2f23' }}>
       <ActionLogTimeline entityType="item" entityId={itemId} containerId={containerId} characterId={characterId} />
     </DialogContent>
   </Dialog>

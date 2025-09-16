@@ -25,41 +25,43 @@ interface ItemEditDialogProps {
 const ItemEditDialog: React.FC<ItemEditDialogProps> = ({ open, initialName, initialDescription, initialQuantity, initialValue, initialContainerId, containers, characters, onClose, onSave }) => {
   const [name, setName] = useState(initialName);
   const [description, setDescription] = useState(initialDescription);
-  const [quantity, setQuantity] = useState<string>("");
-  const [value, setValue] = useState<string>("");
+  const [quantity, setQuantity] = useState<string>(initialQuantity !== undefined ? String(initialQuantity) : "");
+  const [value, setValue] = useState<string>(initialValue !== undefined ? String(initialValue) : "");
   const [containerId, setContainerId] = useState(initialContainerId);
   const [characterId, setCharacterId] = useState<string>("");
   React.useEffect(() => {
     setName(initialName);
     setDescription(initialDescription);
-  setQuantity("");
-  setValue("");
+    setQuantity(initialQuantity !== undefined ? String(initialQuantity) : "");
+    setValue(initialValue !== undefined ? String(initialValue) : "");
     setContainerId(initialContainerId);
     // Set characterId based on initialContainerId
     const cont = containers.find(c => c.id === initialContainerId);
     setCharacterId(cont ? cont.character_id : "");
   }, [initialName, initialDescription, initialQuantity, initialValue, initialContainerId, containers, open]);
   return (
-    <Dialog open={open} onClose={onClose}>
-      <DialogTitle>Edit Item</DialogTitle>
-      <DialogContent>
-
+    <Dialog open={open} onClose={onClose} PaperProps={{ sx: { bgcolor: '#4e3d2c' } }}>
+      <DialogTitle sx={{ color: '#ebdbb2' }}>Edit Item</DialogTitle>
+      <DialogContent sx={{ bgcolor: '#4e3d2c' }}>
         <TextField
-          select
-          label="Character"
+          label="Name"
           fullWidth
-          value={characterId}
-          onChange={e => {
-            setCharacterId(e.target.value);
-            setContainerId("");
+          value={name}
+          onChange={e => setName(e.target.value)}
+          InputLabelProps={{ style: { color: '#ebdbb2' } }}
+          sx={{
+            mt: 2,
+            input: { color: '#ebdbb2' },
+            label: { color: '#ebdbb2' },
+            '& .MuiInputBase-root, & .MuiOutlinedInput-root': {
+              bgcolor: '#3c2f23',
+              color: '#ebdbb2',
+            },
+            '& .MuiInputLabel-root': { color: '#ebdbb2' },
+            '& .MuiOutlinedInput-notchedOutline': { borderColor: '#a89984' },
           }}
-        >
-          {characters.map((char: Character) => (
-            <MenuItem key={char.id} value={char.id}>{char.name}</MenuItem>
-          ))}
-        </TextField>
+        />
         <TextField
-          margin="dense"
           label="Description"
           fullWidth
           multiline
@@ -67,8 +69,19 @@ const ItemEditDialog: React.FC<ItemEditDialogProps> = ({ open, initialName, init
           maxRows={6}
           value={description}
           onChange={e => setDescription(e.target.value)}
+          InputLabelProps={{ style: { color: '#ebdbb2' } }}
+          sx={{
+            mt: 2,
+            input: { color: '#ebdbb2' },
+            label: { color: '#ebdbb2' },
+            '& .MuiInputBase-root, & .MuiOutlinedInput-root': {
+              bgcolor: '#3c2f23',
+              color: '#ebdbb2',
+            },
+            '& .MuiInputLabel-root': { color: '#ebdbb2' },
+            '& .MuiOutlinedInput-notchedOutline': { borderColor: '#a89984' },
+          }}
         />
-
         <TextField
           label="Quantity"
           type="number"
@@ -80,7 +93,18 @@ const ItemEditDialog: React.FC<ItemEditDialogProps> = ({ open, initialName, init
           }}
           onBlur={() => { if (quantity === "" || quantity === "-") setQuantity("0"); }}
           inputProps={{ inputMode: "numeric", pattern: "[0-9\\-]*" }}
-          sx={{ mt: 2 }}
+          InputLabelProps={{ style: { color: '#ebdbb2' } }}
+          sx={{
+            mt: 2,
+            input: { color: '#ebdbb2' },
+            label: { color: '#ebdbb2' },
+            '& .MuiInputBase-root, & .MuiOutlinedInput-root': {
+              bgcolor: '#3c2f23',
+              color: '#ebdbb2',
+            },
+            '& .MuiInputLabel-root': { color: '#ebdbb2' },
+            '& .MuiOutlinedInput-notchedOutline': { borderColor: '#a89984' },
+          }}
         />
         <TextField
           label="Value (gp)"
@@ -93,24 +117,23 @@ const ItemEditDialog: React.FC<ItemEditDialogProps> = ({ open, initialName, init
           }}
           onBlur={() => { if (value === "" || value === "-") setValue("0"); }}
           inputProps={{ inputMode: "numeric", pattern: "[0-9\\-]*" }}
-          sx={{ mt: 2 }}
+          InputLabelProps={{ style: { color: '#ebdbb2' } }}
+          sx={{
+            mt: 2,
+            input: { color: '#ebdbb2' },
+            label: { color: '#ebdbb2' },
+            '& .MuiInputBase-root, & .MuiOutlinedInput-root': {
+              bgcolor: '#3c2f23',
+              color: '#ebdbb2',
+            },
+            '& .MuiInputLabel-root': { color: '#ebdbb2' },
+            '& .MuiOutlinedInput-notchedOutline': { borderColor: '#a89984' },
+          }}
         />
-
-        <TextField
-          select
-          label="Container"
-          fullWidth
-          value={containerId}
-          onChange={e => setContainerId(e.target.value)}
-        >
-          {containers.filter((c: Container) => c.character_id === characterId).map((container: Container) => (
-            <MenuItem key={container.id} value={container.id}>{container.name}</MenuItem>
-          ))}
-  </TextField>
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} color="inherit">Cancel</Button>
-  <Button onClick={() => { onSave(name, description, Number(quantity) || 0, Number(value) || 0, containerId); onClose(); }} variant="contained" color="primary">Save</Button>
+        <Button onClick={() => { onSave(name, description, Number(quantity) || 0, Number(value) || 0, containerId); onClose(); }} variant="contained" color="primary">Save</Button>
       </DialogActions>
     </Dialog>
   );

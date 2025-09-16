@@ -29,13 +29,33 @@ const ContainerForm: React.FC<ContainerFormProps> = ({ addContainer, characters 
           value={name}
           onChange={e => setName(e.target.value)}
           required
-          sx={{ input: { color: '#ebdbb2' }, label: { color: '#a89984' } }}
+          InputLabelProps={{ style: { color: '#ebdbb2' } }}
+          sx={{
+            input: { color: '#ebdbb2' },
+            label: { color: '#ebdbb2' },
+            '& .MuiInputBase-root, & .MuiOutlinedInput-root': {
+              bgcolor: '#3c2f23',
+              color: '#ebdbb2',
+            },
+            '& .MuiInputLabel-root': { color: '#ebdbb2' },
+            '& .MuiOutlinedInput-notchedOutline': { borderColor: '#a89984' },
+          }}
         />
         <TextField
           label="Description"
           value={description}
           onChange={e => setDescription(e.target.value)}
-          sx={{ input: { color: '#ebdbb2' }, label: { color: '#a89984' } }}
+          InputLabelProps={{ style: { color: '#ebdbb2' } }}
+          sx={{
+            input: { color: '#ebdbb2' },
+            label: { color: '#ebdbb2' },
+            '& .MuiInputBase-root, & .MuiOutlinedInput-root': {
+              bgcolor: '#3c2f23',
+              color: '#ebdbb2',
+            },
+            '& .MuiInputLabel-root': { color: '#ebdbb2' },
+            '& .MuiOutlinedInput-notchedOutline': { borderColor: '#a89984' },
+          }}
         />
         <TextField
           select
@@ -43,10 +63,34 @@ const ContainerForm: React.FC<ContainerFormProps> = ({ addContainer, characters 
           value={characterId}
           onChange={e => setCharacterId(e.target.value)}
           required
-          sx={{ minWidth: 220, color: '#ebdbb2', '& .MuiInputBase-input': { color: '#ebdbb2' }, '& .MuiInputLabel-root': { color: '#a89984' } }}
+          InputLabelProps={{ style: { color: '#ebdbb2' } }}
+          sx={{
+            minWidth: 220,
+            '& .MuiInputBase-root, & .MuiOutlinedInput-root, & .MuiSelect-root': {
+              bgcolor: '#3c2f23',
+              color: '#ebdbb2',
+            },
+            '& .MuiSelect-select, & .MuiInputBase-input': {
+              color: '#ebdbb2',
+              bgcolor: '#3c2f23',
+            },
+            '& .MuiInputLabel-root': { color: '#ebdbb2' },
+            '& .MuiOutlinedInput-notchedOutline': { borderColor: '#a89984' },
+            '& .MuiMenuItem-root': { color: '#ebdbb2', bgcolor: '#3c2f23' },
+          }}
+          SelectProps={{
+            MenuProps: {
+              PaperProps: {
+                sx: {
+                  bgcolor: '#3c2f23',
+                  color: '#ebdbb2',
+                },
+              },
+            },
+          }}
         >
           {characters.map((char) => (
-            <MenuItem key={char.id} value={char.id}>{char.name}</MenuItem>
+            <MenuItem key={char.id} value={char.id} sx={{ color: '#ebdbb2', bgcolor: '#3c2f23' }}>{char.name}</MenuItem>
           ))}
         </TextField>
         <Button type="submit" variant="contained" sx={{ bgcolor: '#b8bb26', color: '#282828' }}>Add Container</Button>

@@ -12,11 +12,11 @@ interface ContainerListProps {
   deleteContainer: (id: string) => void;
   editContainer: (id: string, container: { name: string; description?: string; character_id: string }) => void;
   characters: Character[];
-  onShowChangelog?: (idx: number) => void;
-  changelogIdx?: number | null;
+  onShowChangelog?: (id: string) => void;
+  changelogId?: string | null;
 }
 
-const ContainerList: React.FC<ContainerListProps> = ({ containers, deleteContainer, editContainer, characters, onShowChangelog, changelogIdx }) => {
+const ContainerList: React.FC<ContainerListProps> = ({ containers, deleteContainer, editContainer, characters, onShowChangelog, changelogId }) => {
   const [editIdx, setEditIdx] = useState<number | null>(null);
 
   const getCharacterName = (characterId: string) => {
@@ -62,8 +62,8 @@ const ContainerList: React.FC<ContainerListProps> = ({ containers, deleteContain
                 <TableCell sx={{ color: '#ebdbb2' }}>{getCharacterName(container.character_id)}</TableCell>
                 <TableCell align="right">
                   <Stack direction="row" spacing={1}>
-                    <IconButton edge="end" aria-label="history" onClick={() => onShowChangelog && onShowChangelog(idx)}>
-                      <HistoryIcon sx={{ color: changelogIdx === idx ? '#40c4c4' : '#40c4c4', opacity: changelogIdx === idx ? 1 : 0.7 }} />
+                    <IconButton edge="end" aria-label="history" onClick={() => onShowChangelog && onShowChangelog(container.id)}>
+                      <HistoryIcon sx={{ color: changelogId === container.id ? '#40c4c4' : '#40c4c4', opacity: changelogId === container.id ? 1 : 0.7 }} />
                     </IconButton>
                     <IconButton sx={{ color: '#fabd2f' }} size="small" onClick={() => setEditIdx(idx)}>
                       <EditIcon />

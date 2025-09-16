@@ -29,7 +29,17 @@ const CharacterForm: React.FC<CharacterFormProps> = ({ addCharacter }) => {
           value={name}
           onChange={e => setName(e.target.value)}
           required
-          sx={{ input: { color: '#ebdbb2' }, label: { color: '#a89984' } }}
+          InputLabelProps={{ style: { color: '#ebdbb2' } }}
+          sx={{
+            input: { color: '#ebdbb2' },
+            label: { color: '#ebdbb2' },
+            '& .MuiInputBase-root, & .MuiOutlinedInput-root': {
+              bgcolor: '#3c2f23',
+              color: '#ebdbb2',
+            },
+            '& .MuiInputLabel-root': { color: '#ebdbb2' },
+            '& .MuiOutlinedInput-notchedOutline': { borderColor: '#a89984' },
+          }}
         />
         <TextField
           select
@@ -37,10 +47,34 @@ const CharacterForm: React.FC<CharacterFormProps> = ({ addCharacter }) => {
           value={playerId}
           onChange={e => setPlayerId(e.target.value)}
           required
-          sx={{ minWidth: 220, color: '#ebdbb2', '& .MuiInputBase-input': { color: '#ebdbb2' }, '& .MuiInputLabel-root': { color: '#a89984' } }}
+          InputLabelProps={{ style: { color: '#ebdbb2' } }}
+          sx={{
+            minWidth: 220,
+            '& .MuiInputBase-root, & .MuiOutlinedInput-root, & .MuiSelect-root': {
+              bgcolor: '#3c2f23',
+              color: '#ebdbb2',
+            },
+            '& .MuiSelect-select, & .MuiInputBase-input': {
+              color: '#ebdbb2',
+              bgcolor: '#3c2f23',
+            },
+            '& .MuiInputLabel-root': { color: '#ebdbb2' },
+            '& .MuiOutlinedInput-notchedOutline': { borderColor: '#a89984' },
+            '& .MuiMenuItem-root': { color: '#ebdbb2', bgcolor: '#3c2f23' },
+          }}
+          SelectProps={{
+            MenuProps: {
+              PaperProps: {
+                sx: {
+                  bgcolor: '#3c2f23',
+                  color: '#ebdbb2',
+                },
+              },
+            },
+          }}
         >
           {players.map((player: { id: string; name: string }) => (
-            <MenuItem key={player.id} value={player.id}>{player.name}</MenuItem>
+            <MenuItem key={player.id} value={player.id} sx={{ color: '#ebdbb2', bgcolor: '#3c2f23' }}>{player.name}</MenuItem>
           ))}
         </TextField>
         <Button type="submit" variant="contained" sx={{ bgcolor: '#b8bb26', color: '#282828' }}>Add Character</Button>

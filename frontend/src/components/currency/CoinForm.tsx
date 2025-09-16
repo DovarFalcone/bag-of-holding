@@ -39,10 +39,34 @@ const CoinForm: React.FC<CoinFormProps> = ({ addCoin, characters }) => {
           value={characterId}
           onChange={e => setCharacterId(e.target.value)}
           required
-          sx={{ minWidth: 220, color: '#ebdbb2', '& .MuiInputBase-input': { color: '#ebdbb2' }, '& .MuiInputLabel-root': { color: '#a89984' } }}
+          InputLabelProps={{ style: { color: '#ebdbb2' } }}
+          sx={{
+            minWidth: 220,
+            '& .MuiInputBase-root, & .MuiOutlinedInput-root, & .MuiSelect-root': {
+              bgcolor: '#3c2f23',
+              color: '#ebdbb2',
+            },
+            '& .MuiSelect-select, & .MuiInputBase-input': {
+              color: '#ebdbb2',
+              bgcolor: '#3c2f23',
+            },
+            '& .MuiInputLabel-root': { color: '#ebdbb2' },
+            '& .MuiOutlinedInput-notchedOutline': { borderColor: '#a89984' },
+            '& .MuiMenuItem-root': { color: '#ebdbb2', bgcolor: '#3c2f23' },
+          }}
+          SelectProps={{
+            MenuProps: {
+              PaperProps: {
+                sx: {
+                  bgcolor: '#3c2f23',
+                  color: '#ebdbb2',
+                },
+              },
+            },
+          }}
         >
           {characters.map((char) => (
-            <MenuItem key={char.id} value={char.id}>{char.name}</MenuItem>
+            <MenuItem key={char.id} value={char.id} sx={{ color: '#ebdbb2', bgcolor: '#3c2f23' }}>{char.name}</MenuItem>
           ))}
         </TextField>
         <TextField
@@ -51,10 +75,34 @@ const CoinForm: React.FC<CoinFormProps> = ({ addCoin, characters }) => {
           value={coinType}
           onChange={e => setCoinType(e.target.value)}
           required
-          sx={{ minWidth: 180, color: '#ebdbb2' }}
+          InputLabelProps={{ style: { color: '#ebdbb2' } }}
+          sx={{
+            minWidth: 180,
+            '& .MuiInputBase-root, & .MuiOutlinedInput-root, & .MuiSelect-root': {
+              bgcolor: '#3c2f23',
+              color: '#ebdbb2',
+            },
+            '& .MuiSelect-select, & .MuiInputBase-input': {
+              color: '#ebdbb2',
+              bgcolor: '#3c2f23',
+            },
+            '& .MuiInputLabel-root': { color: '#ebdbb2' },
+            '& .MuiOutlinedInput-notchedOutline': { borderColor: '#a89984' },
+            '& .MuiMenuItem-root': { color: '#ebdbb2', bgcolor: '#3c2f23' },
+          }}
+          SelectProps={{
+            MenuProps: {
+              PaperProps: {
+                sx: {
+                  bgcolor: '#3c2f23',
+                  color: '#ebdbb2',
+                },
+              },
+            },
+          }}
         >
           {COIN_TYPES.map(type => (
-            <MenuItem key={type} value={type}>{type}</MenuItem>
+            <MenuItem key={type} value={type} sx={{ color: '#ebdbb2', bgcolor: '#3c2f23' }}>{type}</MenuItem>
           ))}
         </TextField>
         <TextField
@@ -69,7 +117,17 @@ const CoinForm: React.FC<CoinFormProps> = ({ addCoin, characters }) => {
           required
           helperText="Negative values allowed (e.g. -10 to subtract)"
           inputProps={{ inputMode: "numeric", pattern: "[0-9\\-]*" }}
-          sx={{ input: { color: '#ebdbb2' }, label: { color: '#a89984' } }}
+          InputLabelProps={{ style: { color: '#ebdbb2' } }}
+          sx={{
+            input: { color: '#ebdbb2' },
+            label: { color: '#ebdbb2' },
+            '& .MuiInputBase-root, & .MuiOutlinedInput-root': {
+              bgcolor: '#3c2f23',
+              color: '#ebdbb2',
+            },
+            '& .MuiInputLabel-root': { color: '#ebdbb2' },
+            '& .MuiOutlinedInput-notchedOutline': { borderColor: '#a89984' },
+          }}
         />
         <TextField
           select
@@ -77,10 +135,34 @@ const CoinForm: React.FC<CoinFormProps> = ({ addCoin, characters }) => {
           value={source}
           onChange={e => setSource(e.target.value)}
           required
-          sx={{ minWidth: 220, color: '#ebdbb2' }}
+          InputLabelProps={{ style: { color: '#ebdbb2' } }}
+          sx={{
+            minWidth: 220,
+            '& .MuiInputBase-root, & .MuiOutlinedInput-root, & .MuiSelect-root': {
+              bgcolor: '#3c2f23',
+              color: '#ebdbb2',
+            },
+            '& .MuiSelect-select, & .MuiInputBase-input': {
+              color: '#ebdbb2',
+              bgcolor: '#3c2f23',
+            },
+            '& .MuiInputLabel-root': { color: '#ebdbb2' },
+            '& .MuiOutlinedInput-notchedOutline': { borderColor: '#a89984' },
+            '& .MuiMenuItem-root': { color: '#ebdbb2', bgcolor: '#3c2f23' },
+          }}
+          SelectProps={{
+            MenuProps: {
+              PaperProps: {
+                sx: {
+                  bgcolor: '#3c2f23',
+                  color: '#ebdbb2',
+                },
+              },
+            },
+          }}
         >
           {SOURCE_OPTIONS.map(opt => (
-            <MenuItem key={opt} value={opt}>{opt.charAt(0).toUpperCase() + opt.slice(1)}</MenuItem>
+            <MenuItem key={opt} value={opt} sx={{ color: '#ebdbb2', bgcolor: '#3c2f23' }}>{opt.charAt(0).toUpperCase() + opt.slice(1)}</MenuItem>
           ))}
         </TextField>
         {source === "custom" && (

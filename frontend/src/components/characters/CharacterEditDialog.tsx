@@ -19,9 +19,9 @@ const CharacterEditDialog: React.FC<CharacterEditDialogProps> = ({ open, initial
     setPlayerId(initialPlayerId);
   }, [initialName, initialPlayerId, open]);
   return (
-    <Dialog open={open} onClose={onClose}>
-      <DialogTitle>Edit/Transfer Character</DialogTitle>
-      <DialogContent>
+    <Dialog open={open} onClose={onClose} PaperProps={{ sx: { bgcolor: '#4e3d2c' } }}>
+      <DialogTitle sx={{ color: '#ebdbb2' }}>Edit/Transfer Character</DialogTitle>
+      <DialogContent sx={{ bgcolor: '#4e3d2c' }}>
         <TextField
           autoFocus
           margin="dense"
@@ -29,6 +29,17 @@ const CharacterEditDialog: React.FC<CharacterEditDialogProps> = ({ open, initial
           fullWidth
           value={name}
           onChange={e => setName(e.target.value)}
+          InputLabelProps={{ style: { color: '#ebdbb2' } }}
+          sx={{
+            input: { color: '#ebdbb2' },
+            label: { color: '#ebdbb2' },
+            '& .MuiInputBase-root, & .MuiOutlinedInput-root': {
+              bgcolor: '#3c2f23',
+              color: '#ebdbb2',
+            },
+            '& .MuiInputLabel-root': { color: '#ebdbb2' },
+            '& .MuiOutlinedInput-notchedOutline': { borderColor: '#a89984' },
+          }}
         />
         <TextField
           select
@@ -36,10 +47,34 @@ const CharacterEditDialog: React.FC<CharacterEditDialogProps> = ({ open, initial
           fullWidth
           value={playerId}
           onChange={e => setPlayerId(e.target.value)}
-          sx={{ minWidth: 220, mt: 2, color: '#ebdbb2', '& .MuiInputBase-input': { color: '#ebdbb2' }, '& .MuiInputLabel-root': { color: '#a89984' } }}
+          InputLabelProps={{ style: { color: '#ebdbb2' } }}
+          sx={{
+            minWidth: 220, mt: 2,
+            '& .MuiInputBase-root, & .MuiOutlinedInput-root, & .MuiSelect-root': {
+              bgcolor: '#3c2f23',
+              color: '#ebdbb2',
+            },
+            '& .MuiSelect-select, & .MuiInputBase-input': {
+              color: '#ebdbb2',
+              bgcolor: '#3c2f23',
+            },
+            '& .MuiInputLabel-root': { color: '#ebdbb2' },
+            '& .MuiOutlinedInput-notchedOutline': { borderColor: '#a89984' },
+            '& .MuiMenuItem-root': { color: '#ebdbb2', bgcolor: '#3c2f23' },
+          }}
+          SelectProps={{
+            MenuProps: {
+              PaperProps: {
+                sx: {
+                  bgcolor: '#3c2f23',
+                  color: '#ebdbb2',
+                },
+              },
+            },
+          }}
         >
           {players.map((player) => (
-            <MenuItem key={player.id} value={player.id}>{player.name}</MenuItem>
+            <MenuItem key={player.id} value={player.id} sx={{ color: '#ebdbb2', bgcolor: '#3c2f23' }}>{player.name}</MenuItem>
           ))}
         </TextField>
       </DialogContent>

@@ -31,11 +31,26 @@ const CharacterInventoryPage: React.FC = () => {
         value={selectedCharacter}
         onChange={e => setSelectedCharacter(e.target.value)}
         displayEmpty
-        sx={{ mb: 3, minWidth: 220 }}
+        sx={{
+          mb: 3,
+          minWidth: 220,
+          bgcolor: '#3c2f23',
+          color: '#ebdbb2',
+          '& .MuiSelect-select': { color: '#ebdbb2', bgcolor: '#3c2f23' },
+          '& .MuiOutlinedInput-notchedOutline': { borderColor: '#a89984' },
+        }}
+        MenuProps={{
+          PaperProps: {
+            sx: {
+              bgcolor: '#3c2f23',
+              color: '#ebdbb2',
+            },
+          },
+        }}
       >
-        <MenuItem value="" disabled>Select Character</MenuItem>
+        <MenuItem value="" disabled sx={{ color: '#a89984', bgcolor: '#3c2f23' }}>Select Character</MenuItem>
         {characterList.map((char: Character) => (
-          <MenuItem key={char.id} value={char.id}>{char.name}</MenuItem>
+          <MenuItem key={char.id} value={char.id} sx={{ color: '#ebdbb2', bgcolor: '#3c2f23' }}>{char.name}</MenuItem>
         ))}
       </Select>
       {selectedCharacter && (

@@ -21,7 +21,7 @@ interface ItemListProps {
 
 const ItemList: React.FC<ItemListProps> = ({ items, deleteItem, editItem, containers, characters }) => {
   const [editIdx, setEditIdx] = useState<number | null>(null);
-  const [historyIdx, setHistoryIdx] = useState<number | null>(null);
+  const [historyItemId, setHistoryItemId] = useState<string | null>(null);
 
   const getContainerName = (containerId: string) => {
     const cont = containers.find((c: { id: string; name: string }) => c.id === containerId);
@@ -31,7 +31,15 @@ const ItemList: React.FC<ItemListProps> = ({ items, deleteItem, editItem, contai
   const handleSave = (name: string, description: string, quantity: number, value: number, containerId: string) => {
     if (editIdx !== null) {
       const item = items[editIdx];
-      editItem(item.id, { name, description, quantity, value, container_id: containerId });
+      editItem(item.id, {
+        name,
+        description,
+        quantity,
+        value,
+        container_id: containerId,
+        created_at: item.created_at,
+        updated_at: item.updated_at,
+      });
     }
     setEditIdx(null);
   };
@@ -70,7 +78,7 @@ const ItemList: React.FC<ItemListProps> = ({ items, deleteItem, editItem, contai
                 <TableCell sx={{ color: '#ebdbb2' }}>{item.created_at ? new Date(item.created_at).toLocaleString(undefined, { hour12: false }) : ''}</TableCell>
                 <TableCell sx={{ color: '#ebdbb2' }}>{item.updated_at ? new Date(item.updated_at).toLocaleString(undefined, { hour12: false }) : ''}</TableCell>
                 <TableCell align="right">
-                  <IconButton sx={{ color: '#b8bb26' }} size="small" onClick={() => setHistoryIdx(idx)} title="View History">
+                  <IconButton sx={{ color: '#b8bb26' }} size="small" onClick={() => setHistoryItemId(item.id)} title="View History">
                     <HistoryIcon />
                   </IconButton>
                   <IconButton sx={{ color: '#fabd2f' }} size="small" onClick={() => setEditIdx(idx)}>
@@ -98,9 +106,9 @@ const ItemList: React.FC<ItemListProps> = ({ items, deleteItem, editItem, contai
         onSave={handleSave}
       />
       <ItemHistoryDialog
-        open={historyIdx !== null}
-        onClose={() => setHistoryIdx(null)}
-        itemId={historyIdx !== null ? items[historyIdx].id : ''}
+        open={historyItemId !== null}
+        onClose={() => setHistoryItemId(null)}
+        itemId={historyItemId || ''}
       />
     </>
   );
